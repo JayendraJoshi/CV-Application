@@ -7,10 +7,7 @@ function App() {
 
   return (
     <>
-      <div>
-        <InputScreen/>
-
-      </div>
+        <InputScreen/>   
     </>
   )
 }
