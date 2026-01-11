@@ -15,16 +15,19 @@ function Heading({text}){
 export function InputScreen(){
     return(
             <section className="input-screen">
-                <div class="input-screen-wrapper">
-                <Heading text = "CV Builder"/>
-                <h2 className="description">
-                    Build a custom CV by adding your details in the forms below! Your CV will be dynamically displayed in the preview.
-                </h2>
-                <Section text="Personal Details" imgSource={personIcon}/>
-                <Section text="Education" imgSource={educationIcon}/>
-                <Section text="Work Experience" imgSource={workIcon}/>
-                <Section text="Technical Skills" imgSource={skillsIcon}/>
-                
+                <div className="input-screen-wrapper">
+                <header>
+                    <Heading text = "CV Builder"/>
+                    <h2 className="description">
+                        Build a custom CV by adding your details in the forms below! Your CV will be dynamically displayed in the preview.
+                    </h2>
+                </header>
+                <main>
+                    <Section text="Personal Details" imgSource={personIcon} inputfields={["Full Name","Phone Number","E-mail","Address","Linkedin (Optional)"]}/>
+                    <Section text="Education" imgSource={educationIcon} inputfields={["School","Degree","Start Date","End Date","Address"]}/>
+                    <Section text="Work Experience" imgSource={workIcon} inputfields={["Company","Role","Start Date","End Date","Accomplishments/Learnings"]}/>
+                    <Section text="Technical Skills" imgSource={skillsIcon} inputfields={["Skill","Description"]}/>
+                </main>
                </div>
 
             </section>

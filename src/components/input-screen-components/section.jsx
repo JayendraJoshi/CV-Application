@@ -1,10 +1,14 @@
-import {SectionButton} from "./section-button"
+import {SectionButton} from "./section-button";
+import {Form} from "./form";
+import {AddButton} from './add-button';
 
-export function Section({text, imgSource}){
+export function Section({text, imgSource, inputfields}){
     return(
         <>
-            <section class="input-section">
+            <section className="input-section">
                 <SectionButton text={text} imgSource={imgSource} />
+                <Form inputfields={inputfields}></Form>
+                <AddButton></AddButton>
             </section>
         </>
     )
