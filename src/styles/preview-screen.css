@@ -1,0 +1,13 @@
+.preview-screen{
+    flex-basis: 50%;
+    background-color: hsl(0 0% 90%);
+    padding:2rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.page{
+    flex-grow:1;
+    align-self:stretch;
+    background-color: white;
+}

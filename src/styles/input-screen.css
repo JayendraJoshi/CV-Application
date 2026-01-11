@@ -3,15 +3,18 @@
     font-size:48px;
 }
 .input-screen{
+    height:100%;
     display:flex;
-    width:50%;
+    flex-basis: 50%;
     flex-direction:column;
-    min-height:100vh;
     background-color:hsl(0, 0%, 0%, 100%);
     color:white;
     align-items:center;
     padding:2rem 5rem;
     gap:1rem;
+    overflow:auto;
+    scrollbar-width: none;      
+    -ms-overflow-style: none; 
 }
 .input-screen-wrapper{
     display:flex;
