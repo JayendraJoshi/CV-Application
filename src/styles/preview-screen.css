@@ -1,3 +1,10 @@
+:root{
+    --h2-weight:500;
+    --p-italic-weight:300;
+    --p-bold-weight:600;
+    --h2-padding-bottom:0.2rem;
+}
+
 .preview-screen{
     flex-basis: 50%;
     background-color: hsl(0 0% 90%);
@@ -10,4 +17,101 @@
     flex-grow:1;
     align-self:stretch;
     background-color: white;
+    padding:2rem;
+}
+/* page header */
+.page-header{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+}
+.page-header h2{
+    font-weight:var(--h2-weight);
+}
+.personal-info{
+    display:flex;
+    padding-bottom:1rem;
+    border-bottom:1px solid black;
+}
+.personal-info > *:not(:last-child){
+    padding-right:0.5rem;
+    border-right:1px solid black;
+}
+.personal-info > *:not(:first-child){
+    padding-left:0.5rem;
+}
+/*eductaion section */
+.education-preview h2{
+    padding-bottom:var(--h2-padding-bottom);
+    border-bottom:1px solid black;
+    font-weight: var(--h2-weight)
+}
+.education-entry {
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:1rem;
+    margin-top:1rem;
+}
+.education-entry .institution-details > :first-child{
+    font-weight: var(--p-bold-weight);
+}
+.education-entry .institution-details > :nth-child(2){
+    font-weight: var(--p-italic-weight);
+    font-style:italic;
+}
+.education-entry .location-and-time-details > :first-child{
+    font-weight: var(--p-bold-weight);
+    text-align: end;
+}
+.education-entry .location-and-time-details > :nth-child(2){
+    font-weight: var(--p-italic-weight);
+    font-style:italic;
+}
+/*work experience section */
+.work-experience-preview h2{
+    padding-bottom:var(--h2-padding-bottom);
+    border-bottom:1px solid black;
+    font-weight: var(--h2-weight)
+}
+.work-experience-entry {
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:1rem;
+    margin-top:1rem;
+}
+.work-experience-entry .work-experience-details > :first-child{
+    font-weight: var(--p-bold-weight);
+}
+.work-experience-entry .work-experience-details > :nth-child(2){
+    font-weight: var(--p-italic-weight);
+    font-style:italic;
+}
+.job-task > :first-child{
+    margin-right:0.4rem;
+}
+.work-experience-entry .location-and-time-details > :first-child{
+    font-weight: var(--p-bold-weight);
+    text-align: end;
+}
+.work-experience-entry .location-and-time-details > :nth-child(2){
+    font-weight: var(--p-italic-weight);
+    font-style:italic;
+}
+/*technical skills section*/
+.technical-skills-preview h2{
+    padding-bottom:var(--h2-padding-bottom);
+    border-bottom:1px solid black;
+    font-weight: var(--h2-weight)
+}
+.technical-skills-entry {
+    display:flex;
+    flex-direction: column;
+    margin-top:1rem;
+}
+.technical-skills-entry > :first-child{
+    font-weight: var(--p-bold-weight);
+}
+.technical-skill > :first-child{
+    margin-right:0.4rem;
 }
