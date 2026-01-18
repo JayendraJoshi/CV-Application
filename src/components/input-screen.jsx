@@ -11,7 +11,6 @@ function Heading({text}){
     )
 }
 
-//State to determine whether section button has be clicked, give props to section and it will determine what to render
 export function InputScreen(){
     return(
             <section className="input-screen">
