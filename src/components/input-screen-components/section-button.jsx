@@ -1,6 +1,7 @@
 import arrowUpIcon from '../../assets/arrow-up.svg';
 import arrowDownIcon from '../../assets/arrow-down.svg';
 
+//click event has to be set to setState of open value
 
 export function SectionButton({text,imgSource}){
     return(

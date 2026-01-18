@@ -4,7 +4,7 @@ export function Form({inputfields}){
             <form>
                 {inputfields.map(function(field){
                     return( 
-                        <label>{field}<input></input></label>
+                        <label key={field}>{field}<input></input></label>
                     )
                 })}
                 <div className="form-button-container">
