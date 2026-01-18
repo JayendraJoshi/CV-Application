@@ -11,7 +11,7 @@ function Heading({text}){
     )
 }
 
-
+//State to determine whether section button has be clicked, give props to section and it will determine what to render
 export function InputScreen(){
     return(
             <section className="input-screen">
@@ -23,10 +23,10 @@ export function InputScreen(){
                     </h2>
                 </header>
                 <main>
-                    <Section text="Personal Details" imgSource={personIcon} inputfields={["Full Name","Phone Number","E-mail","Address","Linkedin (Optional)"]}/>
-                    <Section text="Education" imgSource={educationIcon} inputfields={["School","Degree","Start Date","End Date","Address"]}/>
-                    <Section text="Work Experience" imgSource={workIcon} inputfields={["Company","Role","Start Date","End Date","Accomplishments/Learnings"]}/>
-                    <Section text="Technical Skills" imgSource={skillsIcon} inputfields={["Skill","Description"]}/>
+                    <Section text="Personal Details" imgSource={personIcon} inputfields={["Full Name","Phone Number","E-mail","Address","Linkedin (Optional)"]} />
+                    <Section text="Education" imgSource={educationIcon} inputfields={["School","Degree","Start Date","End Date","Address"]} />
+                    <Section text="Work Experience" imgSource={workIcon} inputfields={["Company","Role","Start Date","End Date","Accomplishments/Learnings"]} />
+                    <Section text="Technical Skills" imgSource={skillsIcon} inputfields={["Skill","Description"]} />
                 </main>
                </div>
 
