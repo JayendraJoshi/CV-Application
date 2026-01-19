@@ -1,13 +1,33 @@
+:root{
+    --h1-font-size:3.5rem;
+    --h2-font-size:2rem;
+    --h3-font-size:1.5rem;
+    --p-add-button-font-size:1rem;
+    --p-description-font-size:1.1rem;
+    --bg-dark: hsl(0 0% 0%);
+    --bg-dark-muted: hsl(0 0% 15%);
+    --bg-light: hsl(0 0% 100%);
+    --bg-light-muted: hsl(0 0% 90%);
+
+    --btn-bg-section-hover:hsl(0 0% 25%);
+    --btn-bg-delete-hover:hsl(0 100% 40%);
+    --btn-bg-save-hover:hsl(212 92% 40%);
+    --btn-bg-cancel-hover: hsl(0 0% 5%);
+
+    --btn-bg-delete: hsl(0 100% 50%);
+    --btn-bg-save:hsl(212 92% 50%);
+    --btn-bg-cancel: var(--bg-dark-muted);
+}
 .heading{
     font-weight:bolder;
-    font-size:48px;
+    font-size:var(--h1-font-size);
 }
 .input-screen{
     height:100%;
     display:flex;
     flex-basis: 50%;
     flex-direction:column;
-    background-color:hsl(0, 0%, 0%, 100%);
+    background-color:var(--bg-dark);
     color:white;
     align-items:center;
     padding:2rem 5rem;
@@ -36,12 +56,15 @@ main{
 }
 .description{
     font-weight:400;
-    font-size:20px;
+    font-size:var(--p-description-font-size);
 }
 .input-section{
     display:flex;
     flex-direction: column;
     gap:2rem;
+}
+.section-button:hover{
+    background-color:var(--btn-bg-section-hover);
 }
 .section-button{
     display:flex;
@@ -49,13 +72,13 @@ main{
     gap:1rem;
     border-radius:10px;
     color:white;
-    background-color:hsl(0 0% 15%);
+    background-color:var(--bg-dark-muted);
     width:100%;
     border:none;
     align-items:center;
 }
 .section-button h2{
-    font-size:32px;
+    font-size:var(--h2-font-size);
 }
 .section-icon{
     width:45px;
@@ -73,7 +96,7 @@ form{
     flex-direction: column;
     padding:1.5rem;
     border-radius:10px;
-    background-color:hsl(100 100% 100%);
+    background-color:var(--bg-light-muted);
     color:black;
     gap:1rem;
 }
@@ -84,7 +107,7 @@ form label{
     gap:0.5rem;
 }
 form input{
-    background-color: hsl(0 0% 90%);
+    background-color: var(--bg-light);
     border:none;
     border-radius: 4px;
     padding:4px;
@@ -100,14 +123,23 @@ form button{
     border-radius:4px;
 }
 .delete-button{
-    background-color:#FF0000;
+    background-color:var(--btn-bg-delete);
     margin-right: auto;
 }
+.delete-button:hover{
+    background-color:var(--btn-bg-delete-hover);
+}
 .cancel-button{
-    background-color:hsl(0 0% 15%);
+    background-color:var(--btn-bg-cancel);
+}
+.cancel-button:hover{
+    background-color:var(--btn-bg-cancel-hover);
 }
 .save-button{
-    background-color: #1980F5;
+    background-color:var(--btn-bg-save);
+}
+.save-button:hover{
+    background-color:var(--btn-bg-save-hover);
 }
 
 .input-add-button{
@@ -120,15 +152,34 @@ form button{
     margin: 0 auto;
     padding:1rem 2rem;
     border-radius: 10px;
+    background-color:var(--bg-light);
+    border:none;
 }
 
 .input-add-button p{
-    font-size:20px;
+    font-size:var(--p-add-button-font-size);
     font-weight: bold;
 }
 
 .input-add-button img{
-    width:30px;
-    height:30px;
+    width:25px;
+    height:25px;
 }
-
+.entry{
+    background-color:var(--bg-light-muted);
+    display:flex;
+    padding:1.5rem;
+    gap:1rem;
+    border-radius:10px;
+    width:100%;
+    border:none;
+    align-items:center;
+}
+.entry h3{
+    font-size:var(--h3-font-size);
+}
+.edit-icon{
+    height:30px;
+    width:30px;
+    margin-left: auto;
+}
