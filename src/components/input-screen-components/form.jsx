@@ -1,8 +1,14 @@
-export function Form({inputfields, setShowForm, manageEntryList}){
+export function Form({inputfieldsContent, setShowForm,entryList, manageEntryList, openEntry, setOpenEntry}){
+    return(
+        openEntry[0] ? <FormWithEntryData inputfieldsContent={inputfieldsContent} setShowForm={setShowForm} entryList={entryList} manageEntryList={manageEntryList} openEntry={openEntry} setOpenEntry={setOpenEntry}></FormWithEntryData>
+        : <EmptyForm inputfieldsContent={inputfieldsContent} setShowForm={setShowForm} manageEntryList={manageEntryList}></EmptyForm>
+    )
+}
+function EmptyForm({inputfieldsContent,setShowForm,manageEntryList}){
     return(
         <div>
-            <form onSubmit={(e) => { e.preventDefault();const fd = new FormData(e.currentTarget); setShowForm(false); addNewEntry(fd, inputfields, manageEntryList)}}>
-                {inputfields.map(function(field){
+            <form onSubmit={(e) => { e.preventDefault();const formData = new FormData(e.currentTarget); setShowForm(false); addNewEntry(formData, inputfieldsContent, manageEntryList)}}>
+                {inputfieldsContent.map(function(field){
                     return( 
                         <label key={field}>{field}<input name={toName(field)}></input></label>
                     )
@@ -16,12 +22,26 @@ export function Form({inputfields, setShowForm, manageEntryList}){
         </div>
     )
 }
-function addNewEntry(fd,inputfields, manageEntryList){
+function FormWithEntryData({inputfieldsContent,setShowForm, entryList, manageEntryList, openEntry, setOpenEntry}){
+    return(
+        <div>
+            <form onSubmit={(e) => { e.preventDefault(); const formData = new FormData(e.currentTarget);setShowForm(false);setOpenEntry(false); updateEntry(formData,inputfieldsContent,manageEntryList,getEntry(entryList,openEntry))}}>
+                {getInputsWithEntryData(inputfieldsContent,getEntry(entryList,openEntry))}
+                <div className="form-button-container">
+                    <button className="delete-button" type="button" onClick={()=>{deleteEntry(manageEntryList,getEntry(entryList,openEntry));setShowForm(false);setOpenEntry(false)}}>Delete</button>
+                    <button className="cancel-button" type="button" onClick={()=>{setShowForm(false);setOpenEntry(false)}}>Cancel</button>
+                    <button className="save-button">Save</button>
+                </div>
+            </form>
+        </div>
+    )
+}
+// Helper functions 
+function addNewEntry(formData,inputfieldsContent, manageEntryList){
     let entryData = {};
-    for(let i = 0;i<inputfields.length;i++){
-        console.log(fd.get(toName(inputfields[i])));
-        const key = toName(inputfields[i]);
-        entryData[key] = fd.get(key);
+    for(let i = 0;i<inputfieldsContent.length;i++){
+        const key = toName(inputfieldsContent[i]);
+        entryData[key] = formData.get(key);
     }
     entryData["id"] = crypto.randomUUID();
     manageEntryList(prev=>[...prev ,entryData]);
@@ -29,15 +49,28 @@ function addNewEntry(fd,inputfields, manageEntryList){
 function toName(field){
      return field.toLowerCase().replace(/\s+/g, "_");
 }
-function EmptyForm(){
-
+function getEntry(entryList,openEntry){
+  return entryList.find(entry=>entry.id == openEntry[1])
 }
-function FormWithEntryData(){
-
+function getInputsWithEntryData(inputfieldsContent,entryData){
+    return inputfieldsContent.map(function(field){
+        return( 
+            <label key={field}>{field}<input name={toName(field)} defaultValue={entryData[toName(field)]}></input></label>
+        )
+    })
 }
+function deleteEntry(manageEntryList,entryToDelete){
+    manageEntryList(prev=>prev.filter(entry => entry.id!=entryToDelete.id));
+}
+function updateEntry(formData,inputfieldsContent,manageEntryList,entryToUpdate){
+    let updatedEntry = {};
+    for(let i=0; i<inputfieldsContent.length;i++){
+        updatedEntry[toName(inputfieldsContent[i])] = formData.get(toName(inputfieldsContent[i]));
+    }
 
-//create empty form and form with entrydata seperateley, determine which to execute by checking openEntry state
-//if true create form with data by getting data of entrydetails by comparing the id's
-//on cancel, set openentry to false, openform to false
-//on save, update values inside entrydetails with new form submission, set openform to false, set openentry to false
-//on delete, delete entrydetails entry, set openform to false, set openEntry to false
+    updatedEntry.id=entryToUpdate.id;
+    manageEntryList(prev=>prev.map(function(entry){
+        if(entry.id === updatedEntry.id) return updatedEntry;
+        else return entry;
+    }))
+}

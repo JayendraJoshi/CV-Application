@@ -1,6 +1,5 @@
-export function Entry({entryDetails}){
-    
+export function Entry({entryDetails,setOpenEntry, setShowForm}){
+    return(
+        <button id={entryDetails.id} onClick={()=>{setOpenEntry([true,entryDetails.id]);setShowForm(true)}}>{Object.values(entryDetails)[0]}</button>
+    )
 }
-//return entry and add id of entrydetails to it, add state to 
-// section to keep track of whether new entry should be openend and which id ([openEntry,id])
-//set openEntry with onclick on entry

@@ -22,10 +22,10 @@ export function InputScreen(){
                     </h2>
                 </header>
                 <main>
-                    <Section text="Personal Details" imgSource={personIcon} inputfields={["Full Name","Phone Number","E-mail","Address","Linkedin (Optional)"]} />
-                    <Section text="Education" imgSource={educationIcon} inputfields={["School","Degree","Start Date","End Date","Address"]} />
-                    <Section text="Work Experience" imgSource={workIcon} inputfields={["Company","Role","Start Date","End Date","Accomplishments/Learnings"]} />
-                    <Section text="Technical Skills" imgSource={skillsIcon} inputfields={["Skill","Description"]} />
+                    <Section text="Personal Details" imgSource={personIcon} inputfieldsContent={["Full Name","Phone Number","E-mail","Address","Linkedin (Optional)"]} />
+                    <Section text="Education" imgSource={educationIcon} inputfieldsContent={["School","Degree","Start Date","End Date","Address"]} />
+                    <Section text="Work Experience" imgSource={workIcon} inputfieldsContent={["Company","Role","Start Date","End Date","Accomplishments/Learnings"]} />
+                    <Section text="Technical Skills" imgSource={skillsIcon} inputfieldsContent={["Skill","Description"]} />
                 </main>
                </div>
 
