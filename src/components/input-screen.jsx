@@ -1,5 +1,6 @@
 import '../styles/input-screen.css';
 import {Section} from './input-screen-components/section'
+import {SingleEntrySection} from './input-screen-components/single-entry-section'
 import personIcon from "../assets/person.svg";
 import educationIcon from '../assets/education.svg';
 import workIcon from "../assets/work.svg";
@@ -22,7 +23,7 @@ export function InputScreen(){
                     </h2>
                 </header>
                 <main>
-                    <Section text="Personal Details" imgSource={personIcon} inputfieldsContent={["Full Name","Phone Number","E-mail","Address","Linkedin (Optional)"]} />
+                    <SingleEntrySection text="Personal Details" imgSource={personIcon} inputfieldsContent={["Full Name","Phone Number","E-mail","Address","Linkedin (Optional)"]} />
                     <Section text="Education" imgSource={educationIcon} inputfieldsContent={["School","Degree","Start Date","End Date","Address"]} />
                     <Section text="Work Experience" imgSource={workIcon} inputfieldsContent={["Company","Role","Start Date","End Date","Accomplishments/Learnings"]} />
                     <Section text="Technical Skills" imgSource={skillsIcon} inputfieldsContent={["Skill","Description"]} />
@@ -32,3 +33,10 @@ export function InputScreen(){
             </section>
     )
 }
+//create new singleEntrySection
+//define states,showsection, inputvalues
+//create new PermanentForm component
+//load inputvalues into inputfields if there are any
+//on delete, clear all inputs
+//on cancel change showform to false and showsection to false and abort changes
+//on save , setinputvalues and show preview on page

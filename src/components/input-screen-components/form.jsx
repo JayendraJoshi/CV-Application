@@ -14,7 +14,7 @@ function EmptyForm({inputfieldsContent,setShowForm,manageEntryList}){
                     )
                 })}
                 <div className="form-button-container">
-                    <button className="delete-button" type="button">Delete</button>
+                    <button className="delete-button" type="button" onClick={(e)=>{e.currentTarget.form?.reset()}}>Delete</button>
                     <button className="cancel-button" type="button" onClick={()=>setShowForm(false)}>Cancel</button>
                     <button className="save-button">Save</button>
                 </div>
@@ -26,7 +26,7 @@ function FormWithEntryData({inputfieldsContent,setShowForm, entryList, manageEnt
     return(
         <div>
             <form onSubmit={(e) => { e.preventDefault(); const formData = new FormData(e.currentTarget);setShowForm(false);setOpenEntry(false); updateEntry(formData,inputfieldsContent,manageEntryList,getEntry(entryList,openEntry))}}>
-                {getInputsWithEntryData(inputfieldsContent,getEntry(entryList,openEntry))}
+                {getInputsFromEntryData(inputfieldsContent,getEntry(entryList,openEntry))}
                 <div className="form-button-container">
                     <button className="delete-button" type="button" onClick={()=>{deleteEntry(manageEntryList,getEntry(entryList,openEntry));setShowForm(false);setOpenEntry(false)}}>Delete</button>
                     <button className="cancel-button" type="button" onClick={()=>{setShowForm(false);setOpenEntry(false)}}>Cancel</button>
@@ -46,13 +46,13 @@ function addNewEntry(formData,inputfieldsContent, manageEntryList){
     entryData["id"] = crypto.randomUUID();
     manageEntryList(prev=>[...prev ,entryData]);
 }
-function toName(field){
+export function toName(field){
      return field.toLowerCase().replace(/\s+/g, "_");
 }
 function getEntry(entryList,openEntry){
   return entryList.find(entry=>entry.id == openEntry[1])
 }
-function getInputsWithEntryData(inputfieldsContent,entryData){
+export function getInputsFromEntryData(inputfieldsContent,entryData){
     return inputfieldsContent.map(function(field){
         return( 
             <label key={field}>{field}<input name={toName(field)} defaultValue={entryData[toName(field)]}></input></label>
