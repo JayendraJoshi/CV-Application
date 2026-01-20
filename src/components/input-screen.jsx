@@ -1,10 +1,7 @@
 import '../styles/input-screen.css';
 import {Section} from './input-screen-components/section'
 import {SingleEntrySection} from './input-screen-components/single-entry-section'
-import personIcon from "../assets/person.svg";
-import educationIcon from '../assets/education.svg';
-import workIcon from "../assets/work.svg";
-import skillsIcon from "../assets/skills.svg";
+import { getSectionsData } from './input-screen-components/sectionsConfig';
 
 function Heading({text}){
     return(
@@ -12,7 +9,7 @@ function Heading({text}){
     )
 }
 
-export function InputScreen(){
+export function InputScreen({manageAllEntriesData}){
     return(
             <section className="input-screen">
                 <div className="input-screen-wrapper">
@@ -23,20 +20,16 @@ export function InputScreen(){
                     </h2>
                 </header>
                 <main>
-                    <SingleEntrySection text="Personal Details" imgSource={personIcon} inputfieldsContent={["Full Name","Phone Number","E-mail","Address","Linkedin (Optional)"]} />
-                    <Section text="Education" imgSource={educationIcon} inputfieldsContent={["School","Degree","Start Date","End Date","Address"]} />
-                    <Section text="Work Experience" imgSource={workIcon} inputfieldsContent={["Company","Role","Start Date","End Date","Accomplishments/Learnings"]} />
-                    <Section text="Technical Skills" imgSource={skillsIcon} inputfieldsContent={["Skill","Description"]} />
+                    {getSectionsData().map(sectionData=>{
+                        if(sectionData.id==="personal"){
+                            return <SingleEntrySection key={sectionData.id} sectionName={sectionData.sectionName} imgSource={sectionData.imgSource} inputfieldsContent={sectionData.inputfieldsContent} manageAllEntriesData={manageAllEntriesData}/>
+                        }else{
+                             return <Section key={sectionData.id} sectionName={sectionData.sectionName} imgSource={sectionData.imgSource} inputfieldsContent={sectionData.inputfieldsContent} manageAllEntriesData={manageAllEntriesData} />
+                        }
+                    })}
                 </main>
                </div>
 
             </section>
     )
 }
-//create new singleEntrySection
-//define states,showsection, inputvalues
-//create new PermanentForm component
-//load inputvalues into inputfields if there are any
-//on delete, clear all inputs
-//on cancel change showform to false and showsection to false and abort changes
-//on save , setinputvalues and show preview on page

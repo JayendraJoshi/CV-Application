@@ -1,5 +1,5 @@
 import { toName, getInputsFromEntryData } from './form';
-export function PermanentForm({inputfieldsContent,setShowSection,entryValues, setEntryValues}){
+export function PermanentForm({inputfieldsContent,setShowSection,entryValues, setEntryValues, manageAllEntriesData}){
     return(  Object.keys(entryValues).length!=0 
             ? <FormWithEntryData inputfieldsContent={inputfieldsContent} setShowSection={setShowSection} entryValues={entryValues} setEntryValues={setEntryValues}></FormWithEntryData>
             :<EmptyForm inputfieldsContent={inputfieldsContent} setShowSection={setShowSection} setEntryValues={setEntryValues}></EmptyForm>

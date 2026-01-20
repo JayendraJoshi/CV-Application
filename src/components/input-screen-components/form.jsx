@@ -1,4 +1,4 @@
-export function Form({inputfieldsContent, setShowForm,entryList, manageEntryList, openEntry, setOpenEntry}){
+export function Form({inputfieldsContent, setShowForm,entryList, manageEntryList, openEntry, setOpenEntry, manageAllEntriesData}){
     return(
         openEntry[0] ? <FormWithEntryData inputfieldsContent={inputfieldsContent} setShowForm={setShowForm} entryList={entryList} manageEntryList={manageEntryList} openEntry={openEntry} setOpenEntry={setOpenEntry}></FormWithEntryData>
         : <EmptyForm inputfieldsContent={inputfieldsContent} setShowForm={setShowForm} manageEntryList={manageEntryList}></EmptyForm>
