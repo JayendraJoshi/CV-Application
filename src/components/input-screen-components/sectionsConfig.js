@@ -25,7 +25,7 @@ export  function getSectionsData(){
       inputfieldsContent:["Company","Role","Start Date","End Date","Accomplishments/Learnings"],
     }
     const technicalskills = {
-        id:"technial",
+        id:"technical",
         sectionName:"Technical Skills",
         imgSource:skillsIcon,
         inputfieldsContent:["Skill","Description"]

@@ -6,6 +6,7 @@ import { getSectionsData } from './components/input-screen-components/sectionsCo
 
 function App() {
   const [allEntriesData, manageAllEntriesData] = useState(getAllEntriesDataObject());
+  console.log(allEntriesData);
  
 
   return (
@@ -17,12 +18,6 @@ function App() {
 }
 
 export default App
-
-//define content of all section in seperate file
-//create allEntriesData object dynamically and use id of section as its keys
-// use allEntriesData object as initial value of allEntriesData state
-// use central file to dynamically create sections in input-screen.jsx
-// pass setAllEntriesData object down to form and permanent-form
 
 function getAllEntriesDataObject(){
   const sectionsData = getSectionsData();

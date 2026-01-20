@@ -1,13 +1,13 @@
-export function Form({inputfieldsContent, setShowForm,entryList, manageEntryList, openEntry, setOpenEntry, manageAllEntriesData}){
+export function Form({inputfieldsContent, setShowForm,entryList, manageEntryList, openEntry, setOpenEntry, manageAllEntriesData, sectionID}){
     return(
-        openEntry[0] ? <FormWithEntryData inputfieldsContent={inputfieldsContent} setShowForm={setShowForm} entryList={entryList} manageEntryList={manageEntryList} openEntry={openEntry} setOpenEntry={setOpenEntry}></FormWithEntryData>
-        : <EmptyForm inputfieldsContent={inputfieldsContent} setShowForm={setShowForm} manageEntryList={manageEntryList}></EmptyForm>
+        openEntry[0] ? <FormWithEntryData inputfieldsContent={inputfieldsContent} setShowForm={setShowForm} entryList={entryList} manageEntryList={manageEntryList} openEntry={openEntry} setOpenEntry={setOpenEntry} manageAllEntriesData={manageAllEntriesData} sectionID={sectionID}></FormWithEntryData>
+        : <EmptyForm inputfieldsContent={inputfieldsContent} setShowForm={setShowForm} manageEntryList={manageEntryList} manageAllEntriesData={manageAllEntriesData} sectionID={sectionID}></EmptyForm>
     )
 }
-function EmptyForm({inputfieldsContent,setShowForm,manageEntryList}){
+function EmptyForm({inputfieldsContent,setShowForm,manageEntryList, manageAllEntriesData, sectionID}){
     return(
         <div>
-            <form onSubmit={(e) => { e.preventDefault();const formData = new FormData(e.currentTarget); setShowForm(false); addNewEntry(formData, inputfieldsContent, manageEntryList)}}>
+            <form onSubmit={(e) => { e.preventDefault();const formData = new FormData(e.currentTarget); setShowForm(false); addNewEntry(formData, inputfieldsContent, manageEntryList, manageAllEntriesData, sectionID)}}>
                 {inputfieldsContent.map(function(field){
                     return( 
                         <label key={field}>{field}<input name={toName(field)}></input></label>
@@ -22,13 +22,13 @@ function EmptyForm({inputfieldsContent,setShowForm,manageEntryList}){
         </div>
     )
 }
-function FormWithEntryData({inputfieldsContent,setShowForm, entryList, manageEntryList, openEntry, setOpenEntry}){
+function FormWithEntryData({inputfieldsContent,setShowForm, entryList, manageEntryList, openEntry, setOpenEntry, manageAllEntriesData, sectionID}){
     return(
         <div>
-            <form onSubmit={(e) => { e.preventDefault(); const formData = new FormData(e.currentTarget);setShowForm(false);setOpenEntry(false); updateEntry(formData,inputfieldsContent,manageEntryList,getEntry(entryList,openEntry))}}>
+            <form onSubmit={(e) => { e.preventDefault(); const formData = new FormData(e.currentTarget);setShowForm(false);setOpenEntry(false); updateEntry(formData,inputfieldsContent,manageEntryList,getEntry(entryList,openEntry), manageAllEntriesData, sectionID)}}>
                 {getInputsFromEntryData(inputfieldsContent,getEntry(entryList,openEntry))}
                 <div className="form-button-container">
-                    <button className="delete-button" type="button" onClick={()=>{deleteEntry(manageEntryList,getEntry(entryList,openEntry));setShowForm(false);setOpenEntry(false)}}>Delete</button>
+                    <button className="delete-button" type="button" onClick={()=>{deleteEntry(manageEntryList,getEntry(entryList,openEntry), manageAllEntriesData, sectionID);setShowForm(false);setOpenEntry(false)}}>Delete</button>
                     <button className="cancel-button" type="button" onClick={()=>{setShowForm(false);setOpenEntry(false)}}>Cancel</button>
                     <button className="save-button">Save</button>
                 </div>
@@ -37,7 +37,7 @@ function FormWithEntryData({inputfieldsContent,setShowForm, entryList, manageEnt
     )
 }
 // Helper functions 
-function addNewEntry(formData,inputfieldsContent, manageEntryList){
+function addNewEntry(formData,inputfieldsContent, manageEntryList,manageAllEntriesData, sectionID){
     let entryData = {};
     for(let i = 0;i<inputfieldsContent.length;i++){
         const key = toName(inputfieldsContent[i]);
@@ -45,6 +45,11 @@ function addNewEntry(formData,inputfieldsContent, manageEntryList){
     }
     entryData["id"] = crypto.randomUUID();
     manageEntryList(prev=>[...prev ,entryData]);
+    manageAllEntriesData(prev=> {
+        const next = {...prev};
+        next[sectionID] = [...next[sectionID], entryData];
+        return next;
+    });
 }
 export function toName(field){
      return field.toLowerCase().replace(/\s+/g, "_");
@@ -59,10 +64,15 @@ export function getInputsFromEntryData(inputfieldsContent,entryData){
         )
     })
 }
-function deleteEntry(manageEntryList,entryToDelete){
-    manageEntryList(prev=>prev.filter(entry => entry.id!=entryToDelete.id));
+function deleteEntry(manageEntryList,entryToDelete, manageAllEntriesData, sectionID){
+    manageEntryList(prev=>prev.filter(entry => entry.id!==entryToDelete.id));
+    manageAllEntriesData(prev=> {
+        const next = {...prev};
+      next[sectionID] = next[sectionID].filter(entry=> entry.id!==entryToDelete.id) 
+        return next;
+    });
 }
-function updateEntry(formData,inputfieldsContent,manageEntryList,entryToUpdate){
+function updateEntry(formData,inputfieldsContent,manageEntryList,entryToUpdate, manageAllEntriesData, sectionID){
     let updatedEntry = {};
     for(let i=0; i<inputfieldsContent.length;i++){
         updatedEntry[toName(inputfieldsContent[i])] = formData.get(toName(inputfieldsContent[i]));
@@ -73,4 +83,15 @@ function updateEntry(formData,inputfieldsContent,manageEntryList,entryToUpdate){
         if(entry.id === updatedEntry.id) return updatedEntry;
         else return entry;
     }))
+    manageAllEntriesData(prev=> {
+        const next = {...prev};
+      next[sectionID] = next[sectionID].map(entry=>{
+            if(entry.id===entryToUpdate.id){
+                return updatedEntry;
+            }else{
+                return entry;
+            }
+        }) 
+        return next;
+    });
 }
