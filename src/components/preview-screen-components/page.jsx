@@ -1,73 +1,61 @@
-function PageHeader(){
+import { getSectionsData } from "../input-screen-components/sectionsConfig"
+import { EducationEntry } from "./education-entry"
+import { WorkExperienceEntry } from "./work-experience-entry"
+import {   TechnicalSkillEntry} from "./technical-skill-entry"
+
+function PersonalInfoSection({entryData}){
+    console.log(entryData);
     return(
-        <div className="page-header">
-            <h2 className="name">John Smith</h2>
-            <div className="personal-info">
-                <p className="address">Los Angeles</p>
-                <p className="linkedin">Linkedin</p>
-                <p className="phone-number">444-222-4532</p>
-                <p className="e-mail">johnsmith@gmail.com</p>
+            <div className="page-header">
+            {entryData.length>0 && <>
+                        <h2 className="name">{entryData[0]?.full_name ?? ""}</h2>
+                        <div className="personal-info">
+                            <p className="address">{entryData[0]?.address ?? ""}</p>
+                            <p className="phone-number">{entryData[0]?.["phone_number"] ?? ""}</p>
+                            <p className="e-mail">{entryData[0]?.["e-mail"] ?? ""}</p>
+                            <p className="linkedin">{entryData[0]?.["linkedin_(optional)"] ?? ""}</p>
+                        </div>
+           </> }
             </div>
-        </div>
     )
 }
-function EducationSection(){
+function EducationSection({sectionData,entriesData}){
     return(
-        <section className="education-preview">
-            <h2>Education</h2>
-            <div className="education-entry">
-                <div className="institution-details">
-                    <p>University of California, Riverside</p>
-                    <p>BSc in Computer Science (GPA 3.5)</p>
-                </div>
-                <div className="location-and-time-details">
-                    <p>Riverside, CA</p>
-                    <p>Graduation date: June 2029</p>
-                </div>
-            </div>
+        <section className={toClassName(sectionData.sectionName)+"-preview"}>
+            {entriesData.length>0 && <h2>{sectionData.sectionName}</h2>}
+            {entriesData?.map(entryData=> <EducationEntry key={entryData.id} entryData={entryData}></EducationEntry>) ?? ""}            
         </section>
     )
 }
 
-function WorkExperienceSection(){
+function WorkExperienceSection({sectionData, entriesData}){
     return (
-        <section className="work-experience-preview">
-            <h2>Work Experience</h2>
-            <div className="work-experience-entry">
-                <div className="work-experience-details">
-                <p>Apple Inc.</p>
-                <p>UX Designer</p>
-                <p className="job-task"><span>-</span>Centered buttons in figma</p>
-                </div>
-                <div className="location-and-time-details">
-                    <p>Silicon Valley, CA</p>
-                    <p>June 2020 - August 2029</p>
-                </div>
-            </div>
+        <section className={toClassName(sectionData.sectionName)+"-preview"}>
+              {entriesData.length>0 && <h2>{sectionData.sectionName}</h2>}   
+                {entriesData?.map(entryData=> <WorkExperienceEntry key={entryData.id} entryData={entryData}></WorkExperienceEntry>) ?? ""}            
         </section>
     )
 }
-function TechnicalSkillsSection(){
+function TechnicalSkillsSection({sectionData, entriesData}){
     return (
-        <section className="technical-skills-preview">
-            <h2>Technical Skills</h2>
-            <div className="technical-skills-entry">
-                <p>Figma</p>
-                <p className="technical-skill"><span>-</span>Can center buttons</p>
-                <p className="technical-skill"><span>-</span>Can center buttons</p>
-                <p className="technical-skill"><span>-</span>Can center buttons</p>
-            </div>
+        <section className={toClassName(sectionData.sectionName)+"-preview"}>
+              {entriesData.length>0 && <h2>{sectionData.sectionName}</h2>}
+            {entriesData?.map(entryData=> <TechnicalSkillEntry key={entryData.id} entryData={entryData}></TechnicalSkillEntry>) ?? ""}            
         </section>
     )
 }
 
-export function Page(){
+export function Page({allEntriesData}){
+    const sectionsData = getSectionsData();
     return(
         <section className="page">
-            <PageHeader></PageHeader>
-            <EducationSection></EducationSection>
-            <WorkExperienceSection></WorkExperienceSection>
-            <TechnicalSkillsSection></TechnicalSkillsSection>
+            <PersonalInfoSection sectionData={sectionsData[0]} entryData={allEntriesData[sectionsData[0].id]}></PersonalInfoSection>
+            <EducationSection sectionData={sectionsData[1]} entriesData={allEntriesData[sectionsData[1].id]}></EducationSection>
+            <WorkExperienceSection sectionData={sectionsData[2]} entriesData={allEntriesData[sectionsData[2].id]}></WorkExperienceSection>
+            <TechnicalSkillsSection sectionData={sectionsData[3]} entriesData={allEntriesData[sectionsData[3].id]}></TechnicalSkillsSection>
         </section>
     )
+}
+function toClassName(name){
+   return name.toLowerCase().replace(/\W+/g, "-");
 }

@@ -1,10 +1,10 @@
 import '../styles/preview-screen.css';
 import {Page} from './preview-screen-components/page'
 
-export function PreviewScreen(){
+export function PreviewScreen({allEntriesData}){
     return (
     <section className="preview-screen">
-        <Page/>
+        <Page allEntriesData={allEntriesData}/>
     </section>
     )
 }

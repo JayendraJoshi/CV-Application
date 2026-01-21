@@ -1,4 +1,4 @@
-import { toName, getInputsFromEntryData } from './form';
+import { toName, getInputsFromEntryData, getInputType } from './form';
 export function PermanentForm({inputfieldsContent,setShowSection,entryValues, setEntryValues, manageAllEntriesData, sectionID}){
     return(  Object.keys(entryValues).length!=0 
             ? <FormWithEntryData inputfieldsContent={inputfieldsContent} setShowSection={setShowSection} entryValues={entryValues} setEntryValues={setEntryValues} manageAllEntriesData={manageAllEntriesData} sectionID={sectionID}></FormWithEntryData>
@@ -24,8 +24,9 @@ function EmptyForm({inputfieldsContent,setShowSection,setEntryValues, manageAllE
         <div>
             <form onSubmit={(e) => { e.preventDefault();const formData = new FormData(e.currentTarget); saveEntry(formData, inputfieldsContent, setEntryValues, manageAllEntriesData, sectionID)}}>
                 {inputfieldsContent.map(function(field){
-                    return( 
-                        <label key={field}>{field}<input name={toName(field)}></input></label>
+                    return( toName(field).toLowerCase().includes("optional") ? 
+                        <label key={field}>{field}<input name={toName(field)} type={getInputType(toName(field))}></input></label>
+                        : <label key={field}>{field}<input name={toName(field)} required type={getInputType(toName(field))}></input></label>
                     )
                 })}
                 <div className="form-button-container">

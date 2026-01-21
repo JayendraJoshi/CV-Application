@@ -20,13 +20,13 @@
     padding:2rem;
 }
 /* page header */
-.page-header{
+.personal-details-preview{
     display:flex;
     flex-direction:column;
     justify-content: center;
     align-items:center;
 }
-.page-header h2{
+.personal-details-previewr h2{
     font-weight:var(--h2-weight);
 }
 .personal-info{
@@ -40,6 +40,9 @@
 }
 .personal-info > *:not(:first-child){
     padding-left:0.5rem;
+}
+.name{
+    text-align: center;
 }
 /*eductaion section */
 .education-preview h2{
@@ -68,6 +71,7 @@
     font-weight: var(--p-italic-weight);
     font-style:italic;
 }
+
 /*work experience section */
 .work-experience-preview h2{
     padding-bottom:var(--h2-padding-bottom);

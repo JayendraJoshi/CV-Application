@@ -6,13 +6,12 @@ import { getSectionsData } from './components/input-screen-components/sectionsCo
 
 function App() {
   const [allEntriesData, manageAllEntriesData] = useState(getAllEntriesDataObject());
-  console.log(allEntriesData);
  
 
   return (
     <>
         <InputScreen manageAllEntriesData={manageAllEntriesData}/>   
-        <PreviewScreen/>
+        <PreviewScreen allEntriesData={allEntriesData}/>
     </>
   )
 }

@@ -9,8 +9,8 @@ function EmptyForm({inputfieldsContent,setShowForm,manageEntryList, manageAllEnt
         <div>
             <form onSubmit={(e) => { e.preventDefault();const formData = new FormData(e.currentTarget); setShowForm(false); addNewEntry(formData, inputfieldsContent, manageEntryList, manageAllEntriesData, sectionID)}}>
                 {inputfieldsContent.map(function(field){
-                    return( 
-                        <label key={field}>{field}<input name={toName(field)}></input></label>
+                    return( toName(field).toLowerCase().includes("optional") ? <label key={field}>{field}<input name={toName(field)} type={getInputType(toName(field))}></input></label> :
+                     <label key={field}>{field}<input name={toName(field)} required type={getInputType(toName(field))}></input></label>
                     )
                 })}
                 <div className="form-button-container">
@@ -59,9 +59,9 @@ function getEntry(entryList,openEntry){
 }
 export function getInputsFromEntryData(inputfieldsContent,entryData){
     return inputfieldsContent.map(function(field){
-        return( 
-            <label key={field}>{field}<input name={toName(field)} defaultValue={entryData[toName(field)]}></input></label>
-        )
+        return( toName(field).toLowerCase().includes("optional") ? <label key={field}>{field}<input name={toName(field)} defaultValue={entryData[toName(field)]} type={getInputType(toName(field))}></input></label>
+        :    <label key={field}>{field}<input name={toName(field)} defaultValue={entryData[toName(field)]} required type={getInputType(toName(field))}></input></label>
+    )
     })
 }
 function deleteEntry(manageEntryList,entryToDelete, manageAllEntriesData, sectionID){
@@ -94,4 +94,17 @@ function updateEntry(formData,inputfieldsContent,manageEntryList,entryToUpdate, 
         }) 
         return next;
     });
+}
+export function getInputType(inputName){
+    let inputNameLowerCase = inputName.toLowerCase();
+
+    if(inputNameLowerCase.includes("phone")){
+        return "tel"
+    }else if(inputNameLowerCase.includes("mail")){
+        return "email";
+    }else if(inputNameLowerCase.includes("date")){
+        return "date";
+    }else{
+        return "text";
+    }
 }
