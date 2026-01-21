@@ -2,6 +2,7 @@ import { getSectionsData } from "../input-screen-components/sectionsConfig"
 import { EducationEntry } from "./education-entry"
 import { WorkExperienceEntry } from "./work-experience-entry"
 import {   TechnicalSkillEntry} from "./technical-skill-entry"
+import linkedInIcon from '../../assets/linkedin.svg';
 
 function PersonalInfoSection({entryData}){
     console.log(entryData);
@@ -13,7 +14,7 @@ function PersonalInfoSection({entryData}){
                             <p className="address">{entryData[0]?.address ?? ""}</p>
                             <p className="phone-number">{entryData[0]?.["phone_number"] ?? ""}</p>
                             <p className="e-mail">{entryData[0]?.["e-mail"] ?? ""}</p>
-                            <p className="linkedin">{entryData[0]?.["linkedin_(optional)"] ?? ""}</p>
+                            {entryData[0]["linkedin_(optional)"] && <p className="linkedin"><a href={entryData[0]?.["linkedin_(optional)"]}><img src={linkedInIcon}></img></a></p>}
                         </div>
            </> }
             </div>

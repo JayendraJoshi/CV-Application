@@ -1,3 +1,5 @@
+import { getInputsPlaceholderText } from "./sectionsConfig";
+
 export function Form({inputfieldsContent, setShowForm,entryList, manageEntryList, openEntry, setOpenEntry, manageAllEntriesData, sectionID}){
     return(
         openEntry[0] ? <FormWithEntryData inputfieldsContent={inputfieldsContent} setShowForm={setShowForm} entryList={entryList} manageEntryList={manageEntryList} openEntry={openEntry} setOpenEntry={setOpenEntry} manageAllEntriesData={manageAllEntriesData} sectionID={sectionID}></FormWithEntryData>
@@ -8,9 +10,9 @@ function EmptyForm({inputfieldsContent,setShowForm,manageEntryList, manageAllEnt
     return(
         <div>
             <form onSubmit={(e) => { e.preventDefault();const formData = new FormData(e.currentTarget); setShowForm(false); addNewEntry(formData, inputfieldsContent, manageEntryList, manageAllEntriesData, sectionID)}}>
-                {inputfieldsContent.map(function(field){
-                    return( toName(field).toLowerCase().includes("optional") ? <label key={field}>{field}<input name={toName(field)} type={getInputType(toName(field))}></input></label> :
-                     <label key={field}>{field}<input name={toName(field)} required type={getInputType(toName(field))}></input></label>
+                {inputfieldsContent.map(function(fieldName){
+                    return( toKey(fieldName).toLowerCase().includes("optional") ? <label key={fieldName}>{fieldName}<input name={toKey(fieldName)} type={getInputType(toKey(fieldName))} pattern={getPattern(toKey(fieldName))} placeholder={getPlaceholderText(fieldName)}></input></label> :
+                     <label key={fieldName}>{fieldName}<input name={toKey(fieldName)} required type={getInputType(toKey(fieldName))} pattern={getPattern(toKey(fieldName))} placeholder={getPlaceholderText(fieldName)}></input></label>
                     )
                 })}
                 <div className="form-button-container">
@@ -40,7 +42,7 @@ function FormWithEntryData({inputfieldsContent,setShowForm, entryList, manageEnt
 function addNewEntry(formData,inputfieldsContent, manageEntryList,manageAllEntriesData, sectionID){
     let entryData = {};
     for(let i = 0;i<inputfieldsContent.length;i++){
-        const key = toName(inputfieldsContent[i]);
+        const key = toKey(inputfieldsContent[i]);
         entryData[key] = formData.get(key);
     }
     entryData["id"] = crypto.randomUUID();
@@ -51,16 +53,16 @@ function addNewEntry(formData,inputfieldsContent, manageEntryList,manageAllEntri
         return next;
     });
 }
-export function toName(field){
+export function toKey(field){
      return field.toLowerCase().replace(/\s+/g, "_");
 }
 function getEntry(entryList,openEntry){
   return entryList.find(entry=>entry.id == openEntry[1])
 }
 export function getInputsFromEntryData(inputfieldsContent,entryData){
-    return inputfieldsContent.map(function(field){
-        return( toName(field).toLowerCase().includes("optional") ? <label key={field}>{field}<input name={toName(field)} defaultValue={entryData[toName(field)]} type={getInputType(toName(field))}></input></label>
-        :    <label key={field}>{field}<input name={toName(field)} defaultValue={entryData[toName(field)]} required type={getInputType(toName(field))}></input></label>
+    return inputfieldsContent.map(function(fieldName){
+        return( toKey(fieldName).toLowerCase().includes("optional") ? <label key={fieldName}>{fieldName}<input name={toKey(fieldName)} defaultValue={entryData[toKey(fieldName)]} type={getInputType(toKey(fieldName))} pattern={getPattern(toKey(fieldName))} placeholder={getPlaceholderText(fieldName)}></input></label>
+        :    <label key={fieldName}>{fieldName}<input name={toKey(fieldName)} defaultValue={entryData[toKey(fieldName)]} required type={getInputType(toKey(fieldName))} pattern={getPattern(toKey(fieldName))} placeholder={getPlaceholderText(fieldName)}></input></label>
     )
     })
 }
@@ -75,7 +77,7 @@ function deleteEntry(manageEntryList,entryToDelete, manageAllEntriesData, sectio
 function updateEntry(formData,inputfieldsContent,manageEntryList,entryToUpdate, manageAllEntriesData, sectionID){
     let updatedEntry = {};
     for(let i=0; i<inputfieldsContent.length;i++){
-        updatedEntry[toName(inputfieldsContent[i])] = formData.get(toName(inputfieldsContent[i]));
+        updatedEntry[toKey(inputfieldsContent[i])] = formData.get(toKey(inputfieldsContent[i]));
     }
 
     updatedEntry.id=entryToUpdate.id;
@@ -108,3 +110,17 @@ export function getInputType(inputName){
         return "text";
     }
 }
+
+export function getPattern(inputName){
+    let inputNameLowerCase = inputName.toLowerCase();
+    if(inputNameLowerCase.includes("phone")){
+       return "^(?:[0-9]|\\x2B|\\x2D|\\x28|\\x29| )*$";
+    }else{
+        return null;
+    }
+}
+export function getPlaceholderText(inputName){
+    let allPlaceHolderText = getInputsPlaceholderText();
+    return allPlaceHolderText[inputName];
+}
+

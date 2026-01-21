@@ -38,3 +38,25 @@ export  function getSectionsData(){
     
     return sectionsData;
 }
+
+export function getInputsPlaceholderText() {
+  return {
+    "Full Name": "e.g. John Smith",
+    "Phone Number": "e.g. +1 555 123 4567",
+    "E-mail": "e.g. john.smith@email.com",
+    "Address": "e.g. Los Angeles, CA",
+    "Linkedin (Optional)": "e.g. https://linkedin.com/in/johnsmith",
+
+    "School": "e.g. University of California, Riverside",
+    "Degree": "e.g. BSc in Computer Science",
+    "Start Date": "e.g. 2022-09-01",
+    "End Date": "e.g. 2026-06-01",
+
+    "Company": "e.g. Apple",
+    "Role": "e.g. UX Designer",
+    "Accomplishments/Learnings": "e.g. Improved checkout conversion by 12%",
+
+    "Skill": "e.g. React",
+    "Description": "e.g. Built reusable components and hooks",
+  };
+}

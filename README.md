@@ -9,4 +9,4 @@ https://fontawesome.com/icons/caret-down?f=classic&s=solid
 https://fontawesome.com/icons/caret-up?f=classic&s=solid
 https://fontawesome.com/icons/plus?f=classic&s=solid
 https://fontawesome.com/icons/pen-to-square?f=classic&s=solid
-
+https://fontawesome.com/icons/linkedin?f=brands&s=solid

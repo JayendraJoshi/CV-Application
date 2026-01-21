@@ -9,30 +9,39 @@
     flex-basis: 50%;
     background-color: hsl(0 0% 90%);
     padding:2rem;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    overflow: auto;
+    height: 100%;
+    min-height: 0;
+    scrollbar-width: none;
 }
 .page{
     flex-grow:1;
-    align-self:stretch;
     background-color: white;
     padding:2rem;
+    margin: 0 auto;   
+    height: 100%;
 }
 /* page header */
-.personal-details-preview{
+.page-header{
     display:flex;
     flex-direction:column;
     justify-content: center;
     align-items:center;
+    margin-bottom:1rem;
 }
-.personal-details-previewr h2{
+.page-header h2{
     font-weight:var(--h2-weight);
 }
 .personal-info{
     display:flex;
     padding-bottom:1rem;
     border-bottom:1px solid black;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.personal-info > *{
+    justify-content: center;
 }
 .personal-info > *:not(:last-child){
     padding-right:0.5rem;
@@ -41,8 +50,16 @@
 .personal-info > *:not(:first-child){
     padding-left:0.5rem;
 }
-.name{
-    text-align: center;
+.personal-info .linkedin{
+    flex-shrink: 0;
+}
+.personal-info img{
+    width:25px;
+    height:25px;
+    flex-shrink: 0;
+}
+.personal-info p{
+    font-size:clamp(0.8rem, 2vw,1rem)
 }
 /*eductaion section */
 .education-preview h2{
@@ -118,4 +135,20 @@
 }
 .technical-skill > :first-child{
     margin-right:0.4rem;
+}
+@media screen and (max-width: 950px) {
+    #root{
+        flex-direction: column;
+        overflow:auto;
+        scrollbar-width: none;
+        height: auto;
+    }
+    .input-screen{
+        overflow: unset;
+        order:2;
+    }
+    .preview-screen{
+        min-height: 800px;
+        overflow:unset;
+    }
 }

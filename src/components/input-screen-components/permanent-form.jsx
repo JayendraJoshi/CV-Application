@@ -1,4 +1,4 @@
-import { toName, getInputsFromEntryData, getInputType } from './form';
+import { toKey, getInputsFromEntryData, getInputType, getPattern, getPlaceholderText } from './form';
 export function PermanentForm({inputfieldsContent,setShowSection,entryValues, setEntryValues, manageAllEntriesData, sectionID}){
     return(  Object.keys(entryValues).length!=0 
             ? <FormWithEntryData inputfieldsContent={inputfieldsContent} setShowSection={setShowSection} entryValues={entryValues} setEntryValues={setEntryValues} manageAllEntriesData={manageAllEntriesData} sectionID={sectionID}></FormWithEntryData>
@@ -23,10 +23,10 @@ function EmptyForm({inputfieldsContent,setShowSection,setEntryValues, manageAllE
     return(
         <div>
             <form onSubmit={(e) => { e.preventDefault();const formData = new FormData(e.currentTarget); saveEntry(formData, inputfieldsContent, setEntryValues, manageAllEntriesData, sectionID)}}>
-                {inputfieldsContent.map(function(field){
-                    return( toName(field).toLowerCase().includes("optional") ? 
-                        <label key={field}>{field}<input name={toName(field)} type={getInputType(toName(field))}></input></label>
-                        : <label key={field}>{field}<input name={toName(field)} required type={getInputType(toName(field))}></input></label>
+                {inputfieldsContent.map(function(fieldName){
+                    return( toKey(fieldName).toLowerCase().includes("optional") ? 
+                        <label key={fieldName}>{fieldName}<input name={toKey(fieldName)} type={getInputType(toKey(fieldName))} pattern={getPattern(toKey(fieldName))} placeholder={getPlaceholderText(fieldName)}></input></label>
+                        : <label key={fieldName}>{fieldName}<input name={toKey(fieldName)} required type={getInputType(toKey(fieldName))} pattern={getPattern(toKey(fieldName))} placeholder={getPlaceholderText(fieldName)}></input></label>
                     )
                 })}
                 <div className="form-button-container">
@@ -41,7 +41,7 @@ function EmptyForm({inputfieldsContent,setShowSection,setEntryValues, manageAllE
 function saveEntry(formData,inputfieldsContent, setEntryValues, manageAllEntriesData, sectionID){
     let entryData = {};
     for(let i = 0;i<inputfieldsContent.length;i++){
-        const key = toName(inputfieldsContent[i]);
+        const key = toKey(inputfieldsContent[i]);
         entryData[key] = formData.get(key);
     }
     setEntryValues(entryData);
@@ -55,7 +55,7 @@ function saveEntry(formData,inputfieldsContent, setEntryValues, manageAllEntries
 function updateEntry(formData, inputfieldsContent, setEntryValues, manageAllEntriesData, sectionID){
      let updatedEntry = {};
     for(let i=0; i<inputfieldsContent.length;i++){
-        updatedEntry[toName(inputfieldsContent[i])] = formData.get(toName(inputfieldsContent[i]));
+        updatedEntry[toKey(inputfieldsContent[i])] = formData.get(toKey(inputfieldsContent[i]));
     }
     setEntryValues(updatedEntry);
      manageAllEntriesData(prev=>{
