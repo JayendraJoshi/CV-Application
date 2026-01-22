@@ -145,10 +145,57 @@
     }
     .input-screen{
         overflow: unset;
-        order:2;
+        padding:2rem;
+        
     }
     .preview-screen{
-        min-height: 800px;
         overflow:unset;
     }
+    .page{
+        min-height: 1000px;
+    }
+    .entry{
+        padding:1.4rem;
+    }
+}
+
+@media screen and (max-width: 530px) {
+
+.section-button{
+    gap:0.5rem;
+    justify-content: space-between;
+    padding:1rem;
+}
+.input-screen h1{
+    font-size:clamp(1.8rem, 4vw, var(--h1-font-size));
+}
+.section-icon{
+    width:clamp(20px,2vw,45px);
+    height:clamp(20px,2vw,45px);
+    filter:invert(1);
+}
+.description{
+      font-size:clamp(0.6rem,3vw,var(--p-description-font-size));
+}
+.input-screen{
+    padding: 2rem;
+}
+ .page{
+        min-height: 800px;
+    }
+.input-add-button{
+    padding:0.8rem 1.6rem;
+}
+
+.preview-screen h2{
+    font-size:16px;
+}
+.preview-screen p{
+font-size:12px;
+}
+.graduation-date, .job-date{
+width:100px;
+display: flex;
+text-align: end;
+}
 }

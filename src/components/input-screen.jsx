@@ -24,7 +24,7 @@ export function InputScreen({manageAllEntriesData}){
                         if(sectionData.id==="personal"){
                             return <SingleEntrySection key={sectionData.id} sectionName={sectionData.sectionName} imgSource={sectionData.imgSource} inputfieldsContent={sectionData.inputfieldsContent} manageAllEntriesData={manageAllEntriesData} sectionID={sectionData.id}/>
                         }else{
-                             return <Section key={sectionData.id} sectionName={sectionData.sectionName} imgSource={sectionData.imgSource} inputfieldsContent={sectionData.inputfieldsContent} manageAllEntriesData={manageAllEntriesData} sectionID={sectionData.id} />
+                             return <Section key={sectionData.id} sectionName={sectionData.sectionName} imgSource={sectionData.imgSource} inputfieldsContent={sectionData.inputfieldsContent} manageAllEntriesData={manageAllEntriesData} sectionID={sectionData.id}/>
                         }
                     })}
                 </main>

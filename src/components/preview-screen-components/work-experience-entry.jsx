@@ -9,7 +9,7 @@ export function WorkExperienceEntry({entryData}){
                 </div>
                 <div className="location-and-time-details">
                     <p className="address">{entryData?.address ?? ""}</p>
-                    <p classname="job-date">{entryData?.["start_date"] +` - ${entryData?.["end_date"]}` ?? ""}</p>
+                    <p className="job-date">{entryData?.["start_date"] +` - ${entryData?.["end_date"]}` ?? ""}</p>
                 </div>
             </div>
     )

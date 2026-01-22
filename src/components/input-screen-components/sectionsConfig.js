@@ -22,13 +22,13 @@ export  function getSectionsData(){
         id:"work",
       sectionName:"Work Experience",
       imgSource:workIcon,
-      inputfieldsContent:["Company","Role","Start Date","End Date","Accomplishments/Learnings"],
+      inputfieldsContent:["Company","Role","Start Date","End Date","Accomplishments/Learnings","Address"],
     }
     const technicalskills = {
         id:"technical",
         sectionName:"Technical Skills",
         imgSource:skillsIcon,
-        inputfieldsContent:["Skill","Description"]
+        inputfieldsContent:["Skill","Description (Optional)"]
     }
 
     sectionsData.push(personalDetails);
@@ -57,6 +57,6 @@ export function getInputsPlaceholderText() {
     "Accomplishments/Learnings": "e.g. Improved checkout conversion by 12%",
 
     "Skill": "e.g. React",
-    "Description": "e.g. Built reusable components and hooks",
+    "Description (Optional)": "e.g. Built reusable components and hooks",
   };
 }

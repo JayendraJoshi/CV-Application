@@ -20,7 +20,7 @@
 }
 .heading{
     font-weight:bolder;
-    font-size:var(--h1-font-size);
+    font-size:clamp(2.5rem, 4vw, var(--h1-font-size));
 }
 .input-screen{
     height:100%;
@@ -56,7 +56,7 @@ main{
 }
 .description{
     font-weight:400;
-    font-size:var(--p-description-font-size);
+     font-size:clamp(0.8rem,3vw,var(--p-description-font-size));
 }
 .input-section{
     display:flex;
@@ -78,17 +78,18 @@ main{
     align-items:center;
 }
 .section-button h2{
-    font-size:var(--h2-font-size);
+    font-size:clamp(1.2rem,2.2vw,var(--h2-font-size));
 }
 .section-icon{
-    width:45px;
-    height:45px;
+    width:clamp(30px,2vw,45px);
+    height:clamp(30px,2vw,45px);
     filter:invert(1);
 }
+
 .arrow-icon{
-    height:45px;
     filter:invert(1);
-    width:40px;
+    width:clamp(35px,2vw,45px);
+    height:clamp(35px,2vw,45px);
     margin-left: auto;
 }
 form{
@@ -99,6 +100,7 @@ form{
     background-color:var(--bg-light-muted);
     color:black;
     gap:1rem;
+    font-size:clamp(0.7rem,2vw,1rem)
 }
 form label{
     display:flex;
@@ -176,10 +178,10 @@ form button{
     align-items:center;
 }
 .entry h3{
-    font-size:var(--h3-font-size);
+    font-size:clamp(1rem,2vw,var(--h3-font-size));
 }
 .edit-icon{
-    height:30px;
-    width:30px;
+    height:clamp(20px,2vw,30px);
+    height:clamp(20px,2vw,30px);
     margin-left: auto;
 }
