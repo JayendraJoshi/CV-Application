@@ -5,7 +5,6 @@ import {   TechnicalSkillEntry} from "./technical-skill-entry"
 import linkedInIcon from '../../assets/linkedin.svg';
 
 function PersonalInfoSection({entryData}){
-    console.log(entryData);
     return(
             <div className="page-header">
             {entryData.length>0 && <>
@@ -38,6 +37,7 @@ function WorkExperienceSection({sectionData, entriesData}){
     )
 }
 function TechnicalSkillsSection({sectionData, entriesData}){
+    console.log("entries data: "+entriesData);
     return (
         <section className={toClassName(sectionData.sectionName)+"-preview"}>
               {entriesData.length>0 && <h2>{sectionData.sectionName}</h2>}

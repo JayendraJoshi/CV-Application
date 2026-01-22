@@ -1,5 +1,5 @@
 export function EducationEntry({entryData}){
-    console.log(entryData);
+
     return(
          <div className="education-entry">
                 <div className="institution-details">

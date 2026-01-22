@@ -1,5 +1,5 @@
 export function WorkExperienceEntry({entryData}){
-    console.log(entryData);
+
     return(
         <div className="work-experience-entry">
                 <div className="work-experience-details">
